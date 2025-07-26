@@ -1,9 +1,9 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
+// import {
+//   BrowserRouter as Router,
+//   Routes,
+//   Route,
+//   useLocation,
+// } from "react-router-dom";
 import VendorLogin from "./pages/vendor/VendorLogin";
 import VendorRegister from "./pages/vendor/VendorRegister";
 import VendorDashboard from "./pages/vendor/Dashboard";
@@ -16,66 +16,68 @@ import LandingPage from "./pages/LandingPage";
 import VendorNavbar from "./components/VendorNavbar";
 import SupplierNavbar from "./components/SupplierNavbar";
 
-const AppRoutes = () => {
-  const location = useLocation();
-  const isVendor = location.pathname.startsWith("/vendor");
-  const isSupplier = location.pathname.startsWith("/supplier");
+// const AppRoutes = () => {
+//   const location = useLocation();
+//   const isVendor = location.pathname.startsWith("/vendor");
+//   const isSupplier = location.pathname.startsWith("/supplier");
 
-  return (
-    <>
-      {/* Show appropriate Navbar based on role */}
-      {isVendor &&
-        !location.pathname.includes("login") &&
-        !location.pathname.includes("register") && <VendorNavbar />}
-      {isSupplier &&
-        !location.pathname.includes("login") &&
-        !location.pathname.includes("register") && <SupplierNavbar />}
+//   return (
+//     <>
+//       {/* Show appropriate Navbar based on role */}
+//       {isVendor &&
+//         !location.pathname.includes("login") &&
+//         !location.pathname.includes("register") && <VendorNavbar />}
+//       {isSupplier &&
+//         !location.pathname.includes("login") &&
+//         !location.pathname.includes("register") && <SupplierNavbar />}
 
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
+//       <Routes>
+//         <Route path="/" element={<LandingPage />} />
 
-        {/* Vendor Routes */}
-        <Route path="/vendor/login" element={<VendorLogin />} />
-        <Route path="/vendor/register" element={<VendorRegister />} />
+//         {/* Vendor Routes */}
+//         <Route path="/vendor/login" element={<VendorLogin />} />
+//         <Route path="/vendor/register" element={<VendorRegister />} />
 
-        {/* Protected Vendor Routes */}
-        <Route
-          path="/vendor/dashboard"
-          element={
-            <ProtectedRoute>
-              <VendorDashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/vendor/suppliers"
-          element={
-            <ProtectedRoute>
-              <Suppliers />
-            </ProtectedRoute>
-          }
-        />
+//         {/* Protected Vendor Routes */}
+//         <Route
+//           path="/vendor/dashboard"
+//           element={
+//             <ProtectedRoute>
+//               <VendorDashboard />
+//             </ProtectedRoute>
+//           }
+//         />
+//         <Route
+//           path="/vendor/suppliers"
+//           element={
+//             <ProtectedRoute>
+//               <Suppliers />
+//             </ProtectedRoute>
+//           }
+//         />
 
-        {/* Supplier Routes */}
-        <Route path="/supplier/login" element={<SupplierLogin />} />
-        <Route path="/supplier/register" element={<SupplierRegister />} />
-        <Route
-          path="/supplier/dashboard"
-          element={
-            <ProtectedRoute>
-              <SupplierDashboard />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </>
-  );
-};
+//         {/* Supplier Routes */}
+//         <Route path="/supplier/login" element={<SupplierLogin />} />
+//         <Route path="/supplier/register" element={<SupplierRegister />} />
+//         <Route
+//           path="/supplier/dashboard"
+//           element={
+//             <ProtectedRoute>
+//               <SupplierDashboard />
+//             </ProtectedRoute>
+//           }
+//         />
+//       </Routes>
+//     </>
+//   );
+// };
 
 export default function App() {
   return (
-    <Router>
-      <AppRoutes />
-    </Router>
+    // <Router>
+    //   <AppRoutes />
+    // </Router>
+   <VendorDashboard/>
+    // <SupplierDashboard />
   );
 }
