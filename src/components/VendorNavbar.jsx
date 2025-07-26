@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 const VendorNavbar = () => {
   return (
     <nav className="bg-blue-600 text-white p-4 flex justify-between items-center">
-      <h1 className="text-xl font-bold">SupplyMitra</h1>
+      <h1 className="text-xl font-bold">Supply Mitra</h1>
       <div className="space-x-4">
-        <Link to="/vendor/login" className="hover:underline">Vendor</Link>
-        <Link to="/supplier/login" className="hover:underline">Supplier</Link>
+        <Link to="/vendor/dashboard" className="hover:underline">Dashboard</Link>
+        <Link to="/vendor/suppliers" className="hover:underline">Suppliers</Link>
+        <Link to="/vendor/cart" className="hover:underline">Cart</Link>
+        <Link to="/vendor/orders" className="hover:underline">Orders</Link>
+        <Link to="/vendor/profile" className="hover:underline">Profile</Link>
       </div>
     </nav>
   );

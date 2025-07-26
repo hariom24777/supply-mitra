@@ -1,7 +1,14 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import VendorLogin from "./pages/vendor/Login";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
+import VendorLogin from "./pages/vendor/VendorLogin";
+import VendorRegister from "./pages/vendor/VendorRegister";
 import VendorDashboard from "./pages/vendor/Dashboard";
-import SupplierLogin from "./pages/supplier/Login";
+import SupplierLogin from "./pages/supplier/SupplierLogin";
+import SupplierRegister from "./pages/supplier/SupplierRegister";
 import SupplierDashboard from "./pages/supplier/Dashboard";
 import Suppliers from "./pages/vendor/Suppliers";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -17,14 +24,21 @@ const AppRoutes = () => {
   return (
     <>
       {/* Show appropriate Navbar based on role */}
-      {isVendor && !location.pathname.includes("login") && <VendorNavbar />}
-      {isSupplier && !location.pathname.includes("login") && <SupplierNavbar />}
+      {isVendor &&
+        !location.pathname.includes("login") &&
+        !location.pathname.includes("register") && <VendorNavbar />}
+      {isSupplier &&
+        !location.pathname.includes("login") &&
+        !location.pathname.includes("register") && <SupplierNavbar />}
 
       <Routes>
         <Route path="/" element={<LandingPage />} />
 
         {/* Vendor Routes */}
         <Route path="/vendor/login" element={<VendorLogin />} />
+        <Route path="/vendor/register" element={<VendorRegister />} />
+
+        {/* Protected Vendor Routes */}
         <Route
           path="/vendor/dashboard"
           element={
@@ -44,6 +58,7 @@ const AppRoutes = () => {
 
         {/* Supplier Routes */}
         <Route path="/supplier/login" element={<SupplierLogin />} />
+        <Route path="/supplier/register" element={<SupplierRegister />} />
         <Route
           path="/supplier/dashboard"
           element={
