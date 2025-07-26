@@ -9,36 +9,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/vendor/login" element={<VendorLogin />} />
-        <Route
-          path="/vendor/dashboard"
-          element={
-            <ProtectedRoute>
-              <VendorDashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/supplier/login" element={<SupplierLogin />} />
-        <Route
-          path="/supplier/dashboard"
-          element={
-            <ProtectedRoute>
-              <SupplierDashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/vendor/suppliers"
-          element={
-            <ProtectedRoute>
-              <Suppliers />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </Router>
+  <>
+  <SupplierDashboard/>
+  
+  </>
   );
 }
