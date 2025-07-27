@@ -16,6 +16,7 @@ import LandingPage from "./pages/LandingPage";
 import VendorNavbar from "./components/VendorNavbar";
 import SupplierNavbar from "./components/SupplierNavbar";
 import VendorProfile from "./pages/vendor/VendorProfile";
+import SupplierProfileSetup from "./pages/supplier/SupplierProfileSetup";
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -34,6 +35,8 @@ const AppRoutes = () => {
 
       <Routes>
         <Route path="/" element={<LandingPage />} />
+
+        
 
         {/* Vendor Routes */}
         <Route path="/vendor/login" element={<VendorLogin />} />
@@ -73,6 +76,14 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <SupplierDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/supplier/profile-setup"
+          element={
+            <ProtectedRoute>
+              <SupplierProfileSetup />
             </ProtectedRoute>
           }
         />

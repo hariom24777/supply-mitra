@@ -4,7 +4,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 px-4 py-8">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 p-4 ">
       {/* Logo & Title - Outside the card */}
       <div className="flex flex-col items-center mb-8">
         <div className="rounded-full bg-white flex items-center justify-center overflow-hidden mb-2">

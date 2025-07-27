@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth"; // ✅ Removed sendEmailVerification
 import { auth } from "../../firebase/config";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { IoHome } from "react-icons/io5";
@@ -19,9 +19,9 @@ const SupplierRegister = () => {
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       alert("Registration successful!");
-      navigate("/supplier/dashboard");
+      navigate("/supplier/profile-setup"); // ✅ Go directly to profile setup
     } catch (err) {
       alert("Registration failed. " + err.message);
     }
@@ -80,6 +80,7 @@ const SupplierRegister = () => {
           </span>
         </p>
       </div>
+
       <button
         className="mt-4 flex items-center gap-2 text-green-600 hover:text-green-800 transition"
         onClick={() => navigate("/")}
