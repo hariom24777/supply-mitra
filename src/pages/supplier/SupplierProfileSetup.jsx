@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { db, storage } from "../../firebase/config";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db } from "../../firebase/config";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -9,7 +8,6 @@ const SupplierProfileSetup = () => {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
   const [supplierType, setSupplierType] = useState("");
-  const [photo, setPhoto] = useState(null);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
@@ -41,19 +39,11 @@ const SupplierProfileSetup = () => {
     setLoading(true);
 
     try {
-      let photoURL = "";
-
-      if (photo) {
-        const photoRef = ref(storage, `supplierPhotos/${user.uid}`);
-        await uploadBytes(photoRef, photo);
-        photoURL = await getDownloadURL(photoRef);
-      }
-
       await setDoc(doc(db, "suppliers", user.uid), {
         name,
         location,
         supplierType,
-        photoURL,
+        photoURL: "", // Optional default or remove this line if not used elsewhere
         uid: user.uid,
         email: user.email,
         isProfileComplete: true,
@@ -111,13 +101,6 @@ const SupplierProfileSetup = () => {
           <option value="Others">Others</option>
         </select>
 
-        <input
-          type="file"
-          accept="image/*"
-          className="w-full"
-          onChange={(e) => setPhoto(e.target.files[0])}
-        />
-
         <button
           type="submit"
           disabled={loading}
@@ -131,4 +114,3 @@ const SupplierProfileSetup = () => {
 };
 
 export default SupplierProfileSetup;
-
