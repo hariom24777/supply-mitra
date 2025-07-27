@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { IoHome } from "react-icons/io5";
 
 const SupplierRegister = () => {
   const [email, setEmail] = useState("");
@@ -27,9 +28,11 @@ const SupplierRegister = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-green-100 px-4">
-      <div className="bg-white shadow-2xl rounded-xl p-8 w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Supplier Registration</h2>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-green-100 px-4 py-8">
+      <div className="bg-white shadow-2xl rounded-2xl p-6 sm:p-8 w-full max-w-md">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-gray-800">
+          Register
+        </h2>
 
         <input
           type="email"
@@ -77,6 +80,13 @@ const SupplierRegister = () => {
           </span>
         </p>
       </div>
+      <button
+        className="mt-4 flex items-center gap-2 text-green-600 hover:text-green-800 transition"
+        onClick={() => navigate("/")}
+      >
+        <IoHome size={18} />
+        Back to Home
+      </button>
     </div>
   );
 };

@@ -15,6 +15,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import LandingPage from "./pages/LandingPage";
 import VendorNavbar from "./components/VendorNavbar";
 import SupplierNavbar from "./components/SupplierNavbar";
+import VendorProfile from "./pages/vendor/VendorProfile";
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -52,6 +53,14 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <Suppliers />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/vendor/profile"
+          element={
+            <ProtectedRoute>
+              <VendorProfile />
             </ProtectedRoute>
           }
         />
