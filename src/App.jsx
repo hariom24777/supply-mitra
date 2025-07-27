@@ -40,8 +40,6 @@ const AppRoutes = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
 
-        
-
         {/* Vendor Routes */}
         <Route path="/vendor/login" element={<VendorLogin />} />
         <Route path="/vendor/register" element={<VendorRegister />} />
@@ -127,14 +125,7 @@ const AppRoutes = () => {
           path="/supplier/settings"
           element={
             <ProtectedRoute>
-              <div className="p-4 md:p-8 bg-gray-50 min-h-screen">
-                <h1 className="text-2xl font-bold mb-2">Settings</h1>
-                <p className="text-sm text-gray-600 mb-6">
-                  Manage your account settings
-                </p>
-                
-               <SupplierProfile />
-              </div>
+              <SupplierProfile />
             </ProtectedRoute>
           }
         />
