@@ -16,7 +16,7 @@ const LandingPage = () => {
       {/* Main Card */}
       <div className="py-2 md:py-12 bg-white shadow-2xl rounded-2xl overflow-hidden flex flex-col md:flex-row w-full max-w-5xl">
         {/* Left - SVG Illustration */}
-        <div className="w-full md:w-1/2 p-6 flex items-center justify-center bg-blue-50">
+        <div className="w-full md:w-1/2 p-6 flex items-center justify-center">
           <img
             src="/landing-page.svg"
             alt="Role Selection"
