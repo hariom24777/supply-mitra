@@ -18,7 +18,7 @@ const LandingPage = () => {
         {/* Left - SVG Illustration */}
         <div className="w-full md:w-1/2 p-6 flex items-center justify-center bg-blue-50">
           <img
-            src="/landing-page-illustration.svg"
+            src="/landing-page.svg"
             alt="Role Selection"
             className="w-full h-auto max-h-72 md:max-h-full"
           />
