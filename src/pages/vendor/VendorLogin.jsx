@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/config";
+import { auth, db } from "../../firebase/config";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { IoHome } from "react-icons/io5";
+import { doc, getDoc } from "firebase/firestore";
 
 const VendorLogin = () => {
   const [email, setEmail] = useState("");
@@ -12,13 +13,24 @@ const VendorLogin = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate("/vendor/dashboard");
-    } catch (err) {
-      alert("Login failed. " + err.message);
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const uid = userCredential.user.uid;
+
+    //  Check if user exists in 'vendors' collection
+    const userDoc = await getDoc(doc(db, "vendors", uid));
+
+    if (!userDoc.exists()) {
+      alert("Access denied: Not a vendor account.");
+      return;
     }
-  };
+
+    //  Proceed to vendor dashboard
+    navigate("/vendor/dashboard");
+  } catch (err) {
+    alert("Login failed. " + err.message);
+  }
+};
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 px-4 py-8">

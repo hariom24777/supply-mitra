@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword } from "firebase/auth"; // ✅ Removed sendEmailVerification
-import { auth } from "../../firebase/config";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../../firebase/config";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { IoHome } from "react-icons/io5";
+import { doc, setDoc } from "firebase/firestore";
 
 const SupplierRegister = () => {
   const [email, setEmail] = useState("");
@@ -19,9 +20,24 @@ const SupplierRegister = () => {
     }
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const user = userCredential.user;
+
+      // Save role to Firestore
+      await setDoc(doc(db, "suppliers", user.uid), {
+        uid: user.uid,
+        email: user.email,
+        role: "supplier",
+        createdAt: new Date(),
+      });
+
       alert("Registration successful!");
-      navigate("/supplier/profile-setup"); // ✅ Go directly to profile setup
+      navigate("/supplier/profile-setup");
     } catch (err) {
       alert("Registration failed. " + err.message);
     }

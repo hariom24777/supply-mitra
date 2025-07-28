@@ -31,6 +31,7 @@ const VendorRegister = () => {
       await setDoc(doc(db, "vendors", userCredential.user.uid), {
         email: email,
         uid: userCredential.user.uid,
+        role: "vendor",
         createdAt: new Date(),
       });
 
