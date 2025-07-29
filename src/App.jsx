@@ -19,9 +19,11 @@ import VendorProfile from "./pages/vendor/VendorProfile";
 import SupplierProfileSetup from "./pages/supplier/SupplierProfileSetup";
 import SupplierProfile from "./pages/supplier/SupplierProfile";
 import Products from "./pages/supplier/Products";
-import Orders from "./pages/supplier/Orders";
 import VendorListing from "./pages/supplier/VendorListing";
 import VendorProfileSetup from "./pages/vendor/VendorProfileSetup";
+import Cart from "./pages/vendor/Cart";
+import VendorOrders from "./pages/vendor/VendorOrders";
+import SupplierOrders from "./pages/supplier/SupplierOrders";
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -71,6 +73,22 @@ const AppRoutes = () => {
           }
         />
         <Route
+          path="/vendor/cart"
+          element={
+            <ProtectedRoute>
+              <Cart />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/vendor/orders"
+          element={
+            <ProtectedRoute>
+              <VendorOrders />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/vendor/settings"
           element={
             <ProtectedRoute>
@@ -111,7 +129,7 @@ const AppRoutes = () => {
           path="/supplier/orders"
           element={
             <ProtectedRoute>
-              <Orders />
+              <SupplierOrders />
             </ProtectedRoute>
           }
         />

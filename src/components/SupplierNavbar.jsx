@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 import { HiUsers } from "react-icons/hi";
-import { IoCart, IoClose, IoCube, IoHome, IoMenu, IoSettings } from "react-icons/io5";
+import {
+  IoCart,
+  IoClose,
+  IoCube,
+  IoHome,
+  IoMenu,
+  IoSettings,
+} from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 const SupplierNavbar = () => {
@@ -46,7 +53,11 @@ const SupplierNavbar = () => {
           className="md:hidden focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? <IoClose className="text-2xl" /> : <IoMenu className="text-2xl" />}
+          {isOpen ? (
+            <IoClose className="text-2xl" />
+          ) : (
+            <IoMenu className="text-2xl" />
+          )}
         </button>
       </nav>
 
@@ -74,7 +85,6 @@ const SupplierNavbar = () => {
         {links.map((link) => (
           <Link
             key={link.to}
-            
             to={link.to}
             onClick={() => setIsOpen(false)}
             className="block text-gray-700 text-base hover:text-blue-600 transition duration-200"
