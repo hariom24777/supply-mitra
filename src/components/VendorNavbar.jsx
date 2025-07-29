@@ -22,7 +22,7 @@ const VendorNavbar = () => {
 
   return (
     <>
-      <nav className="bg-blue-600 text-white p-4 flex justify-between items-center md:px-8">
+      <nav className="bg-blue-600 text-white p-4 flex justify-between items-center md:px-8 fixed top-0 left-0 w-full z-50 shadow-md">
         <h1 className="text-xl font-bold">Supply Mitra</h1>
 
         {/* Desktop Nav */}
