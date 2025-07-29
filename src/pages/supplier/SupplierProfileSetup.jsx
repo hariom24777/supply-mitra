@@ -43,7 +43,7 @@ const SupplierProfileSetup = () => {
         name,
         location,
         supplierType,
-        photoURL: "", // Optional default or remove this line if not used elsewhere
+        photoURL: "", // Optional 
         uid: user.uid,
         email: user.email,
         isProfileComplete: true,
@@ -71,7 +71,9 @@ const SupplierProfileSetup = () => {
         onSubmit={handleSubmit}
         className="bg-white shadow-lg rounded-xl p-6 sm:p-8 w-full max-w-xl space-y-5"
       >
-        <h2 className="text-2xl font-bold text-center">Complete Your Profile</h2>
+        <h2 className="text-2xl font-bold text-center">
+          Complete Your Profile
+        </h2>
 
         <input
           type="text"
