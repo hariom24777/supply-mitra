@@ -13,30 +13,35 @@ const SupplierLogin = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
 
-    // Check role in Firestore (in 'suppliers' collection)
-    const docRef = doc(db, "suppliers", user.uid);
-    const docSnap = await getDoc(docRef);
+      // Check Firestore "suppliers" collection
+      const docRef = doc(db, "suppliers", user.uid);
+      const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-      const userData = docSnap.data();
-      if (userData.role === "supplier") {
-        navigate("/supplier/dashboard");
-      } else {
-        // Role mismatch
-        alert("Access denied: Not a supplier.");
+      if (!docSnap.exists()) {
+        alert("Access denied: No supplier exists.");
         return;
       }
-    } else {
-      alert("No supplier record found. Please check your login or contact admin.");
+
+      // const userData = docSnap.data();
+      // if (userData.role !== "supplier") {
+      //   alert("Access denied: Not a supplier.");
+      //   return;
+      // }
+
+      // Login success – go to supplier dashboard
+      navigate("/supplier/dashboard");
+    } catch (err) {
+      alert("Login failed. Please check your credentials.");
     }
-  } catch (err) {
-    alert("Login failed. Please check your credentials.");
-  }
-};
+  };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-green-100 px-4 py-8">

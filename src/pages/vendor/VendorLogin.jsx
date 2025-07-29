@@ -13,25 +13,34 @@ const VendorLogin = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const uid = userCredential.user.uid;
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      // Check Firestore "vendors" collection
+      const docRef = doc(db, "vendors", user.uid);
+      const docSnap = await getDoc(docRef);
 
-    //  Check if user exists in 'vendors' collection
-    const userDoc = await getDoc(doc(db, "vendors", uid));
+      if (!docSnap.exists()) {
+        alert("Access denied: No vendor exists.");
+        return;
+      }
 
-    if (!userDoc.exists()) {
-      alert("Access denied: Not a vendor account.");
-      return;
+      // const userData = docSnap.data();
+      // if (userData.role !== "vendor") {
+      //   alert("Access denied: Not a vendor.");
+      //   return;
+      // }
+      
+      // Login success – go to vendor dashboard
+      navigate("/vendor/dashboard");
+    } catch (err) {
+      alert("Login failed. Please check your credentials.");
     }
-
-    //  Proceed to vendor dashboard
-    navigate("/vendor/dashboard");
-  } catch (err) {
-    alert("Login failed. " + err.message);
-  }
-};
-
+  };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 px-4 py-8">
