@@ -46,7 +46,7 @@ const SupplierNavbar = () => {
           className="md:hidden focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
         >
-          {isOpen ? <IoClose className="w-6 h-6" /> : <IoMenu className="w-6 h-6" />}
+          {isOpen ? <IoClose className="text-2xl" /> : <IoMenu className="text-2xl" />}
         </button>
       </nav>
 
@@ -58,16 +58,16 @@ const SupplierNavbar = () => {
         ></div>
       )}
 
-      {/* Right Side Mobile Sidebar */}
+      {/* Mobile Sidebar */}
       <div
-        className={`fixed top-0 right-0 w-64 h-full bg-white shadow-lg z-50 p-6 space-y-4 transform transition-transform duration-300 md:hidden ${
+        className={`fixed top-0 right-0 w-64 h-full bg-white shadow-lg z-50 p-6 space-y-5 transform transition-transform duration-300 md:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-bold text-blue-600">Menu</h2>
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold text-blue-600">Menu</h2>
           <button onClick={() => setIsOpen(false)} className="text-gray-600">
-            <IoClose className="w-6 h-6" />
+            <IoClose className="text-2xl" />
           </button>
         </div>
 
@@ -79,9 +79,9 @@ const SupplierNavbar = () => {
             onClick={() => setIsOpen(false)}
             className="block text-gray-700 text-base hover:text-blue-600 transition duration-200"
           >
-            <span className="inline-flex items-center space-x-2">
+            <span className="text-xl inline-flex items-center space-x-2">
               {link.icon}
-              <span>{link.label}</span>
+              <span className="">{link.label}</span>
             </span>
           </Link>
         ))}

@@ -9,7 +9,7 @@ const VendorNavbar = () => {
         <Link to="/vendor/suppliers" className="hover:underline">Suppliers</Link>
         <Link to="/vendor/cart" className="hover:underline">Cart</Link>
         <Link to="/vendor/orders" className="hover:underline">Orders</Link>
-        <Link to="/vendor/profile" className="hover:underline">Profile</Link>
+        <Link to="/vendor/settings" className="hover:underline">Settings</Link>
       </div>
     </nav>
   );

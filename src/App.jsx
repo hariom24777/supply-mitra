@@ -21,6 +21,7 @@ import SupplierProfile from "./pages/supplier/SupplierProfile";
 import Products from "./pages/supplier/Products";
 import Orders from "./pages/supplier/Orders";
 import VendorListing from "./pages/supplier/VendorListing";
+import VendorProfileSetup from "./pages/vendor/VendorProfileSetup";
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -54,6 +55,14 @@ const AppRoutes = () => {
           }
         />
         <Route
+          path="/vendor/profile-setup"
+          element={
+            <ProtectedRoute>
+              <VendorProfileSetup />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/vendor/suppliers"
           element={
             <ProtectedRoute>
@@ -62,7 +71,7 @@ const AppRoutes = () => {
           }
         />
         <Route
-          path="/vendor/profile"
+          path="/vendor/settings"
           element={
             <ProtectedRoute>
               <VendorProfile />
@@ -89,14 +98,7 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/supplier/profile"
-          element={
-            <ProtectedRoute>
-              <SupplierProfile />
-            </ProtectedRoute>
-          }
-        />
+
         <Route
           path="/supplier/products"
           element={

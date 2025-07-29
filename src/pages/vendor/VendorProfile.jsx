@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { auth, db } from "../../firebase/config";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 const VendorProfile = () => {
   const [vendorData, setVendorData] = useState(null);
+  const [editedData, setEditedData] = useState({});
+  const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,14 +18,37 @@ const VendorProfile = () => {
 
         if (vendorSnap.exists()) {
           setVendorData(vendorSnap.data());
+          setEditedData(vendorSnap.data());
         } else {
           console.error("No vendor data found!");
         }
+      } else {
+        navigate("/vendor/login");
       }
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [navigate]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEditedData({ ...editedData, [name]: value });
+  };
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleSave = async () => {
+    try {
+      const vendorRef = doc(db, "vendors", auth.currentUser.uid);
+      await updateDoc(vendorRef, editedData);
+      setVendorData(editedData);
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+  };
 
   const handleLogout = async () => {
     await signOut(auth);
