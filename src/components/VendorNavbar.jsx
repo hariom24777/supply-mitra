@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { HiUsers } from "react-icons/hi";
-import { IoCart, IoClose, IoCube, IoHome, IoMenu, IoSettings } from "react-icons/io5";
+import {
+  IoCart,
+  IoClose,
+  IoCube,
+  IoHome,
+  IoMenu,
+  IoSettings,
+} from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 const VendorNavbar = () => {
@@ -64,17 +71,10 @@ const VendorNavbar = () => {
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed top-0 right-0 w-64 h-full bg-white shadow-lg z-50 p-6 space-y-5 transform transition-transform duration-300 md:hidden ${
+        className={`fixed top-0 right-0 w-64 h-full bg-white shadow-lg z-40 p-6 mt-15 space-y-5 transform transition-transform duration-300 md:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-blue-600">Menu</h2>
-          <button onClick={() => setIsOpen(false)} className="text-gray-600">
-            <IoClose className="text-2xl" />
-          </button>
-        </div>
-
         {links.map((link) => (
           <Link
             key={link.to}

@@ -30,126 +30,127 @@ const AppRoutes = () => {
   const isVendor = location.pathname.startsWith("/vendor");
   const isSupplier = location.pathname.startsWith("/supplier");
 
+  const showNavbar =
+    (isVendor || isSupplier) &&
+    !location.pathname.includes("login") &&
+    !location.pathname.includes("register");
+
   return (
     <>
       {/* Show appropriate Navbar based on role */}
-      {isVendor &&
-        !location.pathname.includes("login") &&
-        !location.pathname.includes("register") && <VendorNavbar />}
-      {isSupplier &&
-        !location.pathname.includes("login") &&
-        !location.pathname.includes("register") && <SupplierNavbar />}
+      {isVendor && showNavbar && <VendorNavbar />}
+      {isSupplier && showNavbar && <SupplierNavbar />}
 
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
+      {/* Apply top padding globally when navbar is visible */}
+      <div className={showNavbar ? "pt-20 bg-gray-100" : ""}>  {/* BG COLOR  TO BE FIXED AT MUTIPLE LOCATIONS */}
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
 
-        {/* Vendor Routes */}
-        <Route path="/vendor/login" element={<VendorLogin />} />
-        <Route path="/vendor/register" element={<VendorRegister />} />
+          {/* Vendor Routes */}
+          <Route path="/vendor/login" element={<VendorLogin />} />
+          <Route path="/vendor/register" element={<VendorRegister />} />
+          <Route
+            path="/vendor/dashboard"
+            element={
+              <ProtectedRoute>
+                <VendorDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/vendor/profile-setup"
+            element={
+              <ProtectedRoute>
+                <VendorProfileSetup />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/vendor/suppliers"
+            element={
+              <ProtectedRoute>
+                <Suppliers />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/vendor/cart"
+            element={
+              <ProtectedRoute>
+                <Cart />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/vendor/orders"
+            element={
+              <ProtectedRoute>
+                <VendorOrders />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/vendor/settings"
+            element={
+              <ProtectedRoute>
+                <VendorProfile />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Protected Vendor Routes */}
-        <Route
-          path="/vendor/dashboard"
-          element={
-            <ProtectedRoute>
-              <VendorDashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/vendor/profile-setup"
-          element={
-            <ProtectedRoute>
-              <VendorProfileSetup />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/vendor/suppliers"
-          element={
-            <ProtectedRoute>
-              <Suppliers />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/vendor/cart"
-          element={
-            <ProtectedRoute>
-              <Cart />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/vendor/orders"
-          element={
-            <ProtectedRoute>
-              <VendorOrders />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/vendor/settings"
-          element={
-            <ProtectedRoute>
-              <VendorProfile />
-            </ProtectedRoute>
-          }
-        />
-
-        {/* Supplier Routes */}
-        <Route path="/supplier/login" element={<SupplierLogin />} />
-        <Route path="/supplier/register" element={<SupplierRegister />} />
-        <Route
-          path="/supplier/dashboard"
-          element={
-            <ProtectedRoute>
-              <SupplierDashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/supplier/profile-setup"
-          element={
-            <ProtectedRoute>
-              <SupplierProfileSetup />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/supplier/products"
-          element={
-            <ProtectedRoute>
-              <Products />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/supplier/orders"
-          element={
-            <ProtectedRoute>
-              <SupplierOrders />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/supplier/vendors"
-          element={
-            <ProtectedRoute>
-              <VendorListing />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/supplier/settings"
-          element={
-            <ProtectedRoute>
-              <SupplierProfile />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
+          {/* Supplier Routes */}
+          <Route path="/supplier/login" element={<SupplierLogin />} />
+          <Route path="/supplier/register" element={<SupplierRegister />} />
+          <Route
+            path="/supplier/dashboard"
+            element={
+              <ProtectedRoute>
+                <SupplierDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/supplier/profile-setup"
+            element={
+              <ProtectedRoute>
+                <SupplierProfileSetup />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/supplier/products"
+            element={
+              <ProtectedRoute>
+                <Products />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/supplier/orders"
+            element={
+              <ProtectedRoute>
+                <SupplierOrders />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/supplier/vendors"
+            element={
+              <ProtectedRoute>
+                <VendorListing />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/supplier/settings"
+            element={
+              <ProtectedRoute>
+                <SupplierProfile />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </div>
     </>
   );
 };
