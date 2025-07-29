@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebase/config";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { IoHome } from "react-icons/io5";
+import { doc, getDoc } from "firebase/firestore";
 
 const SupplierLogin = () => {
   const [email, setEmail] = useState("");
