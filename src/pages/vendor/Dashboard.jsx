@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CartSidebar from "../../components/CartSidebar";
+// import CartSidebar from "../../components/CartSidebar";
 // adjust the path if needed
 
 // Sample vendor/product data
@@ -158,12 +158,12 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <CartSidebar
+      {/* <CartSidebar
         showCart={showCart}
         setShowCart={setShowCart}
         cart={cart}
         vendorData={vendorData}
-      />
+      /> */}
 
       {/* Filters */}
       <div className="flex space-x-4 mb-8">

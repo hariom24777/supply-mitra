@@ -30,7 +30,7 @@ const SupplierDashboard = () => {
         Manage your products and orders
       </p>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {/* Add Product */}
         <div className="bg-white p-6 rounded shadow">
           <h2 className="text-lg font-semibold mb-4">Add New Product</h2>
