@@ -35,7 +35,7 @@ const Suppliers = () => {
             >
               <h3 className="text-xl font-semibold">{supplier.name}</h3>
               <p><IoLocate /> {supplier.location}</p>
-              <p>📦 {supplier.category}</p>
+              <p> {supplier.category}</p>
               <p><IoCall /> {supplier.contact}</p>
               <button
                 className="mt-2 bg-blue-600 text-white px-3 py-1 rounded"

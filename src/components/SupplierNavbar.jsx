@@ -1,13 +1,8 @@
 import { useState, useEffect } from "react";
+import { CgMenuRightAlt } from "react-icons/cg";
 import { HiUsers } from "react-icons/hi";
-import {
-  IoCart,
-  IoClose,
-  IoCube,
-  IoHome,
-  IoMenu,
-  IoSettings,
-} from "react-icons/io5";
+import { IoIosArrowDropright } from "react-icons/io";
+import { IoCart, IoCube, IoHome, IoSettings } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 const SupplierNavbar = () => {
@@ -54,9 +49,9 @@ const SupplierNavbar = () => {
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? (
-            <IoClose className="text-2xl" />
+            <IoIosArrowDropright className="text-2xl" />
           ) : (
-            <IoMenu className="text-2xl" />
+            <CgMenuRightAlt className="text-2xl" />
           )}
         </button>
       </nav>

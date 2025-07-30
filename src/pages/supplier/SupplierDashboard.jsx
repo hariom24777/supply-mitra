@@ -24,7 +24,7 @@ const SupplierDashboard = () => {
   }, [auth]);
 
   return (
-    <div className="p-4 md:p-8 bg-gray-50 min-h-screen">
+    <div className="p-4 md:p-8 min-h-screen">
       <h1 className="text-2xl font-bold mb-2">Supplier Dashboard</h1>
       <p className="text-sm text-gray-600 mb-6">
         Manage your products and orders

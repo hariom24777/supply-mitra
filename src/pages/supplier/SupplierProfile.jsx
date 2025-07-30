@@ -60,7 +60,7 @@ const SupplierProfile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10">
+    <div className="min-h-screen flex items-center justify-center px-4 py-10">
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-3xl">
         <div className="flex flex-col items-center mb-8">
           <img
