@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/config";
+import { auth, db } from "../../firebase/config";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { setDoc, doc } from "firebase/firestore";
-import { db } from "../../firebase/config";
 import { IoHome } from "react-icons/io5";
+import { setDoc, doc } from "firebase/firestore";
 
 const VendorRegister = () => {
   const [email, setEmail] = useState("");
@@ -27,17 +26,20 @@ const VendorRegister = () => {
         password
       );
 
-      // Save vendor data in Firestore
-      await setDoc(doc(db, "vendors", userCredential.user.uid), {
-        email: email,
-        uid: userCredential.user.uid,
+      const user = userCredential.user;
+
+      // Save vendor role to Firestore
+      await setDoc(doc(db, "vendors", user.uid), {
+        uid: user.uid,
+        email: user.email,
         role: "vendor",
         createdAt: new Date(),
       });
 
-      navigate("/vendor/dashboard");
+      alert("Registration successful!");
+      navigate("/vendor/profile-setup");
     } catch (err) {
-      alert("Registration failed: " + err.message);
+      alert("Registration failed. " + err.message);
     }
   };
 
@@ -62,7 +64,7 @@ const VendorRegister = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <div className="relative mb-6">
+        <div className="relative mb-4">
           <input
             type={showConfirmPassword ? "text" : "password"}
             placeholder="Confirm Password"
@@ -94,6 +96,7 @@ const VendorRegister = () => {
           </span>
         </p>
       </div>
+      
       <button
         className="mt-4 flex items-center gap-2 text-blue-600 hover:text-blue-800 transition"
         onClick={() => navigate("/")}

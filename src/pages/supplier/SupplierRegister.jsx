@@ -28,7 +28,7 @@ const SupplierRegister = () => {
 
       const user = userCredential.user;
 
-      // Save role to Firestore
+      // Save supplier role to Firestore
       await setDoc(doc(db, "suppliers", user.uid), {
         uid: user.uid,
         email: user.email,
