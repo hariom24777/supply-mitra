@@ -81,7 +81,7 @@ const SupplierRegister = () => {
 
         <button
           onClick={handleRegister}
-          className="w-full bg-green-600 text-white py-2 rounded-lg font-medium hover:bg-green-700 transition"
+          className="w-full bg-green-600 text-white py-2 rounded-lg font-medium hover:bg-green-700 transition cursor-pointer"
         >
           Register
         </button>

@@ -7,7 +7,7 @@ import { db } from "../../firebase/config";
 
 const VendorProfileSetup = () => {
   const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
+  const [city, setCity] = useState("");
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
@@ -41,7 +41,7 @@ const VendorProfileSetup = () => {
     try {
       await setDoc(doc(db, "vendors", user.uid), {
         name,
-        location,
+        city,
         photoURL: "", // Optional 
         uid: user.uid,
         email: user.email,
@@ -84,10 +84,10 @@ const VendorProfileSetup = () => {
 
         <input
           type="text"
-          placeholder="Location"
+          placeholder="City"
           className="w-full p-3 border border-gray-300 rounded-md"
           required
-          onChange={(e) => setLocation(e.target.value)}
+          onChange={(e) => setCity(e.target.value)}
         />
 
         <button

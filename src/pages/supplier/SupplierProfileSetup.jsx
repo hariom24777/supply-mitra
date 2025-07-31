@@ -6,7 +6,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const SupplierProfileSetup = () => {
   const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
+  const [city, setCity] = useState("");
   const [supplierType, setSupplierType] = useState("");
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
@@ -41,7 +41,7 @@ const SupplierProfileSetup = () => {
     try {
       await setDoc(doc(db, "suppliers", user.uid), {
         name,
-        location,
+        city,
         supplierType,
         photoURL: "", // Optional 
         uid: user.uid,
@@ -85,10 +85,10 @@ const SupplierProfileSetup = () => {
 
         <input
           type="text"
-          placeholder="Location"
+          placeholder="City"
           className="w-full p-3 border border-gray-300 rounded-md"
           required
-          onChange={(e) => setLocation(e.target.value)}
+          onChange={(e) => setCity(e.target.value)}
         />
 
         <select

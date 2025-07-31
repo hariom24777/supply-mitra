@@ -119,7 +119,7 @@ const VendorProfile = () => {
             <input
               type="text"
               name="city"
-              value={editedData.city || ""}
+              value={editedData.city || vendorData.city}
               onChange={handleChange}
               disabled={!isEditing}
               className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50"
