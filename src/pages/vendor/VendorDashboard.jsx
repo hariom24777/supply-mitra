@@ -96,7 +96,7 @@ const vendorData = [
   },
 ];
 
-const Dashboard = () => {
+const VendorDashboard = () => {
   const [location, setLocation] = useState("All Locations");
   const [category, setCategory] = useState("All Categories");
   const [city, setCity] = useState("Kolkata");
@@ -262,4 +262,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default VendorDashboard;

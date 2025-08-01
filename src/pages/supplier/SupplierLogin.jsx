@@ -48,7 +48,7 @@ const SupplierLogin = () => {
       
       <div className="bg-white shadow-2xl rounded-2xl p-6 sm:p-8 w-full max-w-md">
         <h2 className="text-xl sm:text-2xl font-bold mb-6 text-center text-gray-800">
-          Vendor Login
+          Supplier Login
         </h2>
 
         <input

@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import VendorLogin from "./pages/vendor/VendorLogin";
 import VendorRegister from "./pages/vendor/VendorRegister";
-import VendorDashboard from "./pages/vendor/Dashboard";
+import VendorDashboard from "./pages/vendor/VendorDashboard";
 import SupplierLogin from "./pages/supplier/SupplierLogin";
 import SupplierRegister from "./pages/supplier/SupplierRegister";
 import SupplierDashboard from "./pages/supplier/SupplierDashboard";

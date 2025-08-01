@@ -45,8 +45,8 @@ const VendorLogin = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100 px-4 py-8">
       <div className="bg-white shadow-xl rounded-2xl p-6 sm:p-8 w-full max-w-md">
-        <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-gray-800">
-          Login
+        <h2 className="text-xl sm:text-2xl font-bold mb-6 text-center text-gray-800">
+          Vendor Login
         </h2>
 
         <input
