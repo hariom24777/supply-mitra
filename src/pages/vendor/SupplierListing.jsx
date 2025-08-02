@@ -83,7 +83,7 @@ const SupplierListing = () => {
 
                 <div className="flex items-center text-sm text-gray-700 mt-1">
                   <MdPhone className="mr-1" />
-                  {supplier.mobile}
+                  {supplier.mobile || "Not Available" }
                 </div>
                 <button
                   className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700"
