@@ -4,33 +4,37 @@ import {
   getDocs,
   doc,
   setDoc,
-  updateDoc,
   arrayUnion,
 } from "firebase/firestore";
 import { db, auth } from "../../firebase/config";
+import { HiMinus, HiPlus } from "react-icons/hi";
 
 const VendorDashboard = () => {
-  const [suppliers, setSuppliers] = useState([]);
-  const [location, setLocation] = useState("All Locations");
-  const [category, setCategory] = useState("All Categories");
-  const [cart, setCart] = useState({});
+  const [products, setProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [quantities, setQuantities] = useState({});
+  const [cart, setCart] = useState({});
 
-  // Fetch suppliers from Firestore
   useEffect(() => {
     const fetchSuppliers = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, "suppliers"));
-        const data = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setSuppliers(data);
-      } catch (error) {
-        console.error("Error fetching suppliers:", error);
-      }
-    };
+      const querySnapshot = await getDocs(collection(db, "suppliers"));
+      const productList = [];
 
+      querySnapshot.forEach((docSnap) => {
+        const supplier = docSnap.data();
+        const supplierId = docSnap.id;
+        supplier.products?.forEach((product, index) => {
+          productList.push({
+            ...product,
+            supplierName: supplier.name,
+            supplierCity: supplier.city,
+            key: `${supplierId}-${index}`,
+          });
+        });
+      });
+
+      setProducts(productList);
+    };
     fetchSuppliers();
   }, []);
 
@@ -41,18 +45,11 @@ const VendorDashboard = () => {
     }));
   };
 
-  const addToCart = async (supplierIdx, prodIdx) => {
-    const supplier = suppliers[supplierIdx];
-    const product = supplier.products[prodIdx];
-    const key = `${supplierIdx}-${prodIdx}`;
-    const qty = quantities[key] || 1;
-
+  const addToCart = async (product) => {
+    const qty = quantities[product.key] || 1;
     try {
       const user = auth.currentUser;
-      if (!user) {
-        alert("Login required to add to cart");
-        return;
-      }
+      if (!user) return alert("Login required to add to cart");
 
       const cartRef = doc(db, "carts", user.uid);
       await setDoc(
@@ -60,7 +57,6 @@ const VendorDashboard = () => {
         {
           items: arrayUnion({
             ...product,
-            supplierName: supplier.name,
             quantity: qty,
             timestamp: Date.now(),
           }),
@@ -70,134 +66,90 @@ const VendorDashboard = () => {
 
       setCart((prev) => ({
         ...prev,
-        [key]: (prev[key] || 0) + qty,
+        [product.key]: (prev[product.key] || 0) + qty,
       }));
       alert("Added to cart!");
     } catch (error) {
-      console.error("Failed to add to cart:", error);
+      console.error("Add to cart failed:", error);
     }
   };
 
+  const filteredProducts = products.filter((p) => {
+    const search = searchTerm.toLowerCase();
+    return (
+      p.name?.toLowerCase().includes(search) ||
+      p.category?.toLowerCase().includes(search) ||
+      p.supplierName?.toLowerCase().includes(search) ||
+      p.supplierCity?.toLowerCase().includes(search)
+    );
+  });
+
   return (
     <div className="min-h-screen p-6">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="font-bold text-2xl">Vendor Dashboard</h1>
+      <div className="flex flex-col gap-4 md:flex-row md:justify-between md:items-center mb-6">
+        <h1 className="text-2xl font-bold">Vendor Dashboard</h1>
+        <input
+          type="text"
+          placeholder="Search products, suppliers, or categories..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="p-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-600 rounded-lg w-full md:w-1/2"
+        />
       </div>
 
-      {/* Filters */}
-      <div className="flex space-x-4 mb-8">
-        <div>
-          <span className="mr-1">Location:</span>
-          <select
-            className="border px-2 py-1 rounded"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-          >
-            <option>All Locations</option>
-            <option>Delhi</option>
-            <option>Mumbai</option>
-            <option>Bangalore</option>
-          </select>
-        </div>
-        <div>
-          <span className="mr-1">Category:</span>
-          <select
-            className="border px-2 py-1 rounded"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option>All Categories</option>
-            <option>Electronics</option>
-            <option>Fashion</option>
-            <option>Groceries</option>
-          </select>
-        </div>
-      </div>
-
-      {/* Supplier Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-10">
-        {suppliers
-          .filter((s) =>
-            location === "All Locations" ? true : s.city === location
-          )
-          .map((supplier, si) => (
-            <div key={supplier.id} className="bg-white rounded-lg shadow p-4">
-              <div className="flex items-center mb-2">
-                <span className="text-lg font-semibold mr-2">
-                  {supplier.name}
-                </span>
-                <span className="text-gray-500 text-sm">| {supplier.city}</span>
-              </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {filteredProducts.map((product) => (
+          <div key={product.key} className="bg-white rounded-lg shadow p-4">
+            <div className="flex items-center gap-4 mb-3">
+              <img
+                src={product.img}
+                alt={product.name}
+                className="w-14 h-14 object-cover rounded-full border border-gray-100"
+              />
               <div>
-                <span className="text-sm font-semibold text-gray-700 mb-2">
-                  Products
-                </span>
-                {supplier.products?.length > 0 ? (
-                  supplier.products
-                    .filter((prod) =>
-                      category === "All Categories"
-                        ? true
-                        : prod.category === category
-                    )
-                    .map((prod, pi) => {
-                      const key = `${si}-${pi}`;
-                      return (
-                        <div
-                          key={prod.name + pi}
-                          className="flex items-center justify-between bg-blue-50 rounded-lg mt-3 p-3"
-                        >
-                          <div className="flex items-center">
-                            <img
-                              className="w-14 h-14 object-cover rounded mr-3"
-                              src={prod.img}
-                              alt={prod.name}
-                            />
-                            <div>
-                              <div className="font-medium">{prod.name}</div>
-                              <div className="text-xs text-gray-500">
-                                {prod.desc}
-                              </div>
-                              <div className="text-green-600 font-semibold mt-1">
-                                ₹{prod.price}
-                              </div>
-                            </div>
-                          </div>
-                          <div className="flex flex-col items-end">
-                            <div className="flex items-center mb-1">
-                              <button
-                                onClick={() => handleQty(key, -1)}
-                                className="px-2 py-1 bg-gray-200 rounded"
-                              >
-                                -
-                              </button>
-                              <span className="mx-2">
-                                {quantities[key] || 1}
-                              </span>
-                              <button
-                                onClick={() => handleQty(key, 1)}
-                                className="px-2 py-1 bg-gray-200 rounded"
-                              >
-                                +
-                              </button>
-                            </div>
-                            <button
-                              className="bg-blue-600 text-white px-2 py-1 rounded"
-                              onClick={() => addToCart(si, pi)}
-                            >
-                              Add
-                            </button>
-                          </div>
-                        </div>
-                      );
-                    })
-                ) : (
-                  <p className="text-gray-500 text-sm mt-2">
-                    No products listed.
-                  </p>
-                )}
+                <h3 className="font-semibold">{product.name}</h3>
+                <p className="text-sm text-gray-500">{product.desc}</p>
               </div>
             </div>
-          ))}
+
+            <p className="text-sm text-gray-600 mb-1">
+              Supplier:{" "}
+              <span className="font-medium">{product.supplierName}</span>
+            </p>
+            <p className="text-sm text-gray-600 mb-2">
+              City: {product.supplierCity}
+            </p>
+
+            <div className="text-green-600 font-semibold mb-3">
+              ₹{product.price}
+            </div>
+
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => handleQty(product.key, -1)}
+                  className="w-6 h-8 flex items-center justify-center bg-gray-200 border border-gray-300 hover:border-blue-600 rounded cursor-pointer"
+                >
+                  <HiMinus className="text-sm"/>
+                </button>
+                <span>{quantities[product.key] || 1}</span>
+                <button
+                  onClick={() => handleQty(product.key, 1)}
+                  className="w-6 h-8 flex items-center justify-center bg-gray-200 border border-gray-300 hover:border-blue-600 rounded cursor-pointer"
+                >
+                  <HiPlus className="text-sm"/>
+                </button>
+              </div>
+
+              <button
+                className="bg-blue-600 text-white hover:bg-blue-700 px-3 py-1 rounded cursor-pointer"
+                onClick={() => addToCart(product)}
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
