@@ -86,7 +86,7 @@ const VendorRegister = () => {
           Register
         </button>
 
-        <p className="text-center text-gray-600 mt-4">
+        <p className="text-center text-sm md:text-base text-gray-600 mt-4">
           Already have an account?{" "}
           <span
             className="text-blue-600 hover:underline cursor-pointer"

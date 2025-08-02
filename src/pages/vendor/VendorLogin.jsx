@@ -81,7 +81,7 @@ const VendorLogin = () => {
           Login
         </button>
 
-        <p className="text-center text-gray-600 mt-4">
+        <p className="text-center text-sm md:text-base text-gray-600 mt-4">
           Don&apos;t have an account?{" "}
           <span
             className="text-blue-600 hover:underline cursor-pointer"
