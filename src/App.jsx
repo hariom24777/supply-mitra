@@ -42,7 +42,7 @@ const AppRoutes = () => {
       {isSupplier && showNavbar && <SupplierNavbar />}
 
       {/* Apply top padding globally when navbar is visible */}
-      <div className={showNavbar ? "pt-20 bg-gray-100" : ""}>  
+      <div className={showNavbar ? "pt-20 bg-gray-100" : ""}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
 
