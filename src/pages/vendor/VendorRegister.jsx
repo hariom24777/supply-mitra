@@ -53,14 +53,14 @@ const VendorRegister = () => {
         <input
           type="email"
           placeholder="Email"
-          className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-1 focus:ring-blue-600"
           onChange={(e) => setEmail(e.target.value)}
         />
 
         <input
           type="password"
           placeholder="Password"
-          className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-1 focus:ring-blue-600"
           onChange={(e) => setPassword(e.target.value)}
         />
 
@@ -68,7 +68,7 @@ const VendorRegister = () => {
           <input
             type={showConfirmPassword ? "text" : "password"}
             placeholder="Confirm Password"
-            className="w-full p-3 border border-gray-300 rounded-lg pr-10 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full p-3 border border-gray-300 rounded-lg pr-10 focus:outline-none focus:ring-1 focus:ring-blue-600"
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
           <div
@@ -81,12 +81,12 @@ const VendorRegister = () => {
 
         <button
           onClick={handleRegister}
-          className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition cursor-pointer"
+          className="w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-all duration-300 cursor-pointer"
         >
           Register
         </button>
 
-        <p className="text-center text-sm text-gray-600 mt-4">
+        <p className="text-center text-gray-600 mt-4">
           Already have an account?{" "}
           <span
             className="text-blue-600 hover:underline cursor-pointer"
@@ -98,7 +98,7 @@ const VendorRegister = () => {
       </div>
       
       <button
-        className="mt-4 flex items-center gap-2 text-blue-600 hover:text-blue-800 transition"
+        className="mt-4 flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-all duration-300 cursor-pointer"
         onClick={() => navigate("/")}
       >
         <IoHome size={18} />

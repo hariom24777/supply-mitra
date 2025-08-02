@@ -54,7 +54,7 @@ const SupplierLogin = () => {
         <input
           type="email"
           placeholder="Email"
-          className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-green-400"
+          className="w-full p-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-1 focus:ring-green-600"
           onChange={(e) => setEmail(e.target.value)}
         />
 
@@ -62,7 +62,7 @@ const SupplierLogin = () => {
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Password"
-            className="w-full p-3 border border-gray-300 rounded-lg pr-10 focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="w-full p-3 border border-gray-300 rounded-lg pr-10 focus:outline-none focus:ring-1 focus:ring-green-600"
             onChange={(e) => setPassword(e.target.value)}
           />
           <div
@@ -75,12 +75,12 @@ const SupplierLogin = () => {
 
         <button
           onClick={handleLogin}
-          className="w-full bg-green-600 text-white py-2 rounded-lg font-medium hover:bg-green-700 transition cursor-pointer"
+          className="w-full bg-green-600 text-white py-2 rounded-lg font-medium hover:bg-green-700 transition-all duration-300 cursor-pointer"
         >
           Login
         </button>
 
-        <p className="text-center text-sm text-gray-600 mt-4">
+        <p className="text-center text-gray-600 mt-4">
           Don't have an account?{" "}
           <span
             className="text-green-600 hover:underline cursor-pointer"
@@ -91,7 +91,7 @@ const SupplierLogin = () => {
         </p>
       </div>
       <button
-        className="mt-4 flex items-center gap-2 text-green-600 hover:text-green-800 transition"
+        className="mt-4 flex items-center gap-2 text-green-600 hover:text-green-800 transition-all duration-300 cursor-pointer"
         onClick={() => navigate("/")}
       >
         <IoHome size={18} />

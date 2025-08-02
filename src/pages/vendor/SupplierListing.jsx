@@ -6,16 +6,15 @@ import { MdLocationOn, MdPhone } from "react-icons/md";
 const SupplierListing = () => {
   const [suppliers, setSuppliers] = useState([]);
   const [filteredSuppliers, setFilteredSuppliers] = useState([]);
-  const [locationFilter, setLocationFilter] = useState("");
-  const [typeFilter, setTypeFilter] = useState(""); // Optional additional filter
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchSuppliers = async () => {
       const querySnapshot = await getDocs(collection(db, "suppliers"));
-      const supplierList = [];
-      querySnapshot.docs.forEach((doc) => {
-        supplierList.push({ id: doc.id, ...doc.data() });
-      });
+      const supplierList = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
       setSuppliers(supplierList);
       setFilteredSuppliers(supplierList);
     };
@@ -24,48 +23,37 @@ const SupplierListing = () => {
   }, []);
 
   useEffect(() => {
-    let filtered = suppliers;
-
-    if (locationFilter.trim() !== "") {
-      filtered = filtered.filter((supplier) =>
-        supplier.city?.toLowerCase().includes(locationFilter.toLowerCase())
+    if (searchTerm.trim() === "") {
+      setFilteredSuppliers(suppliers);
+    } else {
+      const term = searchTerm.toLowerCase();
+      const filtered = suppliers.filter(
+        (supplier) =>
+          supplier.city?.toLowerCase().includes(term) ||
+          supplier.category?.toLowerCase().includes(term) ||
+          supplier.name?.toLowerCase().includes(term)
       );
+      setFilteredSuppliers(filtered);
     }
-
-    if (typeFilter.trim() !== "") {
-      filtered = filtered.filter((supplier) =>
-        supplier.category?.toLowerCase().includes(typeFilter.toLowerCase())
-      );
-    }
-
-    setFilteredSuppliers(filtered);
-  }, [locationFilter, typeFilter, suppliers]);
+  }, [searchTerm, suppliers]);
 
   return (
     <div className="min-h-screen px-4 py-8">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold mb-6">Browse Suppliers</h2>
+        <div className="flex flex-col gap-4 md:flex-row md:justify-between md:items-center mb-6">
+          <h2 className="text-2xl font-bold">Browse Suppliers</h2>
 
-        {/* Filters */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-          <input
-            type="text"
-            placeholder="Search by City"
-            value={locationFilter}
-            onChange={(e) => setLocationFilter(e.target.value)}
-            className="p-3 rounded-lg border border-gray-300"
-          />
-          <input
-            type="text"
-            placeholder="Filter by Category"
-            value={typeFilter}
-            onChange={(e) => setTypeFilter(e.target.value)}
-            className="p-3 rounded-lg border border-gray-300"
-          />
+          
+            <input
+              type="text"
+              placeholder="Search by City, Category, or Name"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="p-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-blue-600 rounded-lg w-full md:w-1/2"
+            />
         </div>
 
         {/* Supplier Cards */}
-
         {filteredSuppliers.length === 0 ? (
           <div className="text-gray-500 text-center">No suppliers found.</div>
         ) : (
@@ -83,11 +71,13 @@ const SupplierListing = () => {
 
                 <div className="flex items-center text-sm text-gray-700 mt-1">
                   <MdPhone className="mr-1" />
-                  {supplier.mobile || "Not Available" }
+                  {supplier.mobile || "Not Available"}
                 </div>
                 <button
-                  className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700"
-                  onClick={() => alert(`Contact ${supplier.name}`)}
+                  className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 cursor-pointer"
+                  onClick={() =>
+                    alert(`Currently not available. It will be updated soon.`)
+                  }
                 >
                   View Profile
                 </button>
