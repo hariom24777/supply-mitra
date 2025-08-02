@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-// import CartSidebar from "../../components/CartSidebar";
-// adjust the path if needed
 
 // Sample vendor/product data
 const vendorData = [
@@ -125,45 +123,8 @@ const VendorDashboard = () => {
     <div className="min-h-screen p-6">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="font-bold text-2xl">VendorHub</h1>
-        </div>
-        <div className="flex space-x-3 items-center">
-          <select
-            className="border px-3 py-1 rounded"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-          >
-            <option>Kolkata</option>
-            <option>Delhi</option>
-            <option>Mumbai</option>
-            <option>Bangalore</option>
-          </select>
-          <button className="relative" onClick={() => setShowCart(true)}>
-            <svg width="24" height="24" fill="none" className="text-gray-800">
-              <path
-                d="M6 6h15l-1.35 9.14A2 2 0 0 1 17.7 17H9.3a2 2 0 0 1-1.95-1.59L5 2H2"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-              <circle cx="10" cy="21" r="1" stroke="currentColor" />
-              <circle cx="17" cy="21" r="1" stroke="currentColor" />
-            </svg>
-            <span className="absolute -top-2 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-              {Object.keys(cart).length}
-            </span>
-          </button>
-          <button className="relative"></button>
-        </div>
+        <h1 className="font-bold text-2xl">Vendor Dashboard</h1>
       </div>
-
-      {/* <CartSidebar
-        showCart={showCart}
-        setShowCart={setShowCart}
-        cart={cart}
-        vendorData={vendorData}
-      /> */}
 
       {/* Filters */}
       <div className="flex space-x-4 mb-8">
@@ -212,7 +173,7 @@ const VendorDashboard = () => {
                 return (
                   <div
                     key={prod.name}
-                    className="flex items-center justify-between bg-gray-100 rounded-lg mt-3 p-3"
+                    className="flex items-center justify-between bg-blue-50 rounded-lg mt-3 p-3"
                   >
                     <div className="flex items-center">
                       <img
