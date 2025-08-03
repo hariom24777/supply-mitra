@@ -49,7 +49,7 @@ const VendorListing = () => {
             placeholder="Search by City, Category, or Name"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="p-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-green-600 rounded-lg w-full md:w-1/2"
+            className="p-2 border border-gray-300 focus:outline-none focus:ring-1 focus:ring-green-600 rounded w-full md:w-1/2"
           />
         </div>
 
@@ -80,7 +80,7 @@ const VendorListing = () => {
                 </p>
 
                 <button
-                  className="mt-4 px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 transition-all transition-duration-300 cursor-pointer"
+                  className="mt-4 px-4 py-2 bg-green-600 text-white rounded text-sm hover:bg-green-700 transition-all duration-300 cursor-pointer"
                   onClick={() =>
                     alert(`Currently not available. It will be updated soon.`)
                   }

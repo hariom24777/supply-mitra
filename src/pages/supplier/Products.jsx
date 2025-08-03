@@ -121,7 +121,7 @@ const Products = () => {
                   />
                   <button
                     onClick={() => handleEditSubmit(index)}
-                    className="bg-green-600 text-white px-4 py-2 rounded w-full"
+                    className="bg-green-600 text-white px-4 py-2 rounded w-full transition-all duration-300 cursor-pointer"
                   >
                     Save
                   </button>
@@ -141,7 +141,7 @@ const Products = () => {
                         setEditingIndex(index);
                         setEditedProduct(product);
                       }}
-                      className="text-blue-600 hover:underline flex items-center gap-1 cursor-pointer"
+                      className="text-green-600 hover:underline flex items-center gap-1 cursor-pointer"
                     >
                       <MdEdit /> Edit
                     </button>

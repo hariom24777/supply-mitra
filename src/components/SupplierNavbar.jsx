@@ -24,7 +24,7 @@ const SupplierNavbar = () => {
 
   return (
     <>
-      <nav className="bg-blue-600 text-white p-4 flex justify-between items-center md:px-8 fixed top-0 left-0 w-full z-50 shadow-md">
+      <nav className="bg-green-600 text-white p-4 flex justify-between items-center md:px-8 fixed top-0 left-0 w-full z-50 shadow-md">
         <h1 className="text-xl font-bold">Supply Mitra</h1>
 
         {/* Desktop Nav */}
@@ -45,7 +45,7 @@ const SupplierNavbar = () => {
 
         {/* Mobile Hamburger */}
         <button
-          className="md:hidden focus:outline-none"
+          className="md:hidden focus:outline-none cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? (
@@ -75,7 +75,7 @@ const SupplierNavbar = () => {
             key={link.to}
             to={link.to}
             onClick={() => setIsOpen(false)}
-            className="block text-gray-700 text-base hover:text-blue-600 transition duration-200"
+            className="block text-gray-700 text-base hover:text-green-600 transition duration-200"
           >
             <span className="text-xl inline-flex items-center space-x-2">
               {link.icon}

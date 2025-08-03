@@ -45,7 +45,7 @@ const VendorNavbar = () => {
 
         {/* Mobile Hamburger */}
         <button
-          className="md:hidden focus:outline-none"
+          className="md:hidden focus:outline-none cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? (

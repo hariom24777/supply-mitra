@@ -82,7 +82,7 @@ const VendorProfile = () => {
               value={editedData.name || ""}
               onChange={handleChange}
               disabled={!isEditing}
-              className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50"
+              className="w-full p-3 border border-gray-300 rounded bg-gray-50"
             />
           </div>
 
@@ -94,7 +94,7 @@ const VendorProfile = () => {
               type="email"
               value={vendorData.email}
               disabled
-              className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-500"
+              className="w-full p-3 border border-gray-300 rounded bg-gray-50 text-gray-500"
             />
           </div>
 
@@ -108,7 +108,7 @@ const VendorProfile = () => {
               value={editedData.mobile || ""}
               onChange={handleChange}
               disabled={!isEditing}
-              className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50"
+              className="w-full p-3 border border-gray-300 rounded bg-gray-50"
             />
           </div>
 
@@ -122,13 +122,13 @@ const VendorProfile = () => {
               value={editedData.city || vendorData.city}
               onChange={handleChange}
               disabled={!isEditing}
-              className="w-full p-3 border border-gray-300 rounded-lg bg-gray-50"
+              className="w-full p-3 border border-gray-300 rounded bg-gray-50"
             />
           </div>
         </div>
         <div className="mt-8 flex flex-col sm:flex-row justify-between gap-4">
           <button
-            className="w-full sm:w-auto px-6 py-3 bg-red-500 hover:bg-red-600 text-white rounded-lg font-semibold cursor-pointer"
+            className="w-full sm:w-auto px-5 py-2 bg-red-500 hover:bg-red-600 text-white rounded font-semibold cursor-pointer"
             onClick={handleLogout}
           >
             Logout
@@ -136,14 +136,14 @@ const VendorProfile = () => {
 
           {isEditing ? (
             <button
-              className="w-full sm:w-auto px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold cursor-pointer"
+              className="w-full sm:w-auto px-5 py-2 bg-green-600 hover:bg-green-700 text-white rounded font-semibold cursor-pointer"
               onClick={handleSave}
             >
               Save Changes
             </button>
           ) : (
             <button
-              className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold cursor-pointer"
+              className="w-full sm:w-auto px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded font-semibold cursor-pointer"
               onClick={handleEdit}
             >
               Edit Profile

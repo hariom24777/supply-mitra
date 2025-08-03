@@ -14,7 +14,7 @@ const LandingPage = () => {
       </div>
 
       {/* Main Card */}
-      <div className="py-2 md:py-4 bg-white shadow-2xl rounded-2xl overflow-hidden flex flex-col md:flex-row w-full max-w-5xl">
+      <div className="py-2 md:py-4 bg-white shadow-2xl rounded-lg overflow-hidden flex flex-col md:flex-row w-full max-w-5xl">
         {/* Left - SVG Illustration */}
         <div className="w-full md:w-1/2 p-6 flex items-center justify-center">
           <img
@@ -35,13 +35,13 @@ const LandingPage = () => {
           <div className="flex flex-col gap-4">
             <button
               onClick={() => navigate("/supplier/login")}
-              className="bg-green-600 text-white hover:bg-green-700 font-medium py-2 px-4 rounded-lg transition-all duration-300 cursor-pointer"
+              className="bg-green-600 text-white hover:bg-green-700 font-medium py-2 px-4 rounded-md transition-all duration-300 cursor-pointer"
             >
               Continue as Supplier
             </button>
             <button
               onClick={() => navigate("/vendor/login")}
-              className="bg-blue-600 text-white hover:bg-blue-700 font-medium py-2 px-4 rounded-lg transition-all duration-300 cursor-pointer"
+              className="bg-blue-600 text-white hover:bg-blue-700 font-medium py-2 px-4 rounded-md transition-all duration-300 cursor-pointer"
             >
               Continue as Vendor
             </button>
