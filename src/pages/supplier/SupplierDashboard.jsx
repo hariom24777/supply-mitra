@@ -10,8 +10,10 @@ import {
 import { db } from "../../firebase/config";
 import { IoTrash } from "react-icons/io5";
 import { MdEdit } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const SupplierDashboard = () => {
+  const navigate = useNavigate();
   const [supplier, setSupplier] = useState(null);
   const [products, setProducts] = useState([]);
   const [form, setForm] = useState({
@@ -91,7 +93,7 @@ const SupplierDashboard = () => {
                 name="name"
                 value={form.name}
                 onChange={handleChange}
-                className="w-full mt-1 p-2 border rounded"
+                className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-green-600"
                 placeholder="Enter product name"
                 required
               />
@@ -102,7 +104,7 @@ const SupplierDashboard = () => {
                 name="category"
                 value={form.category}
                 onChange={handleChange}
-                className="w-full mt-1 p-2 border rounded"
+                className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-green-600"
                 required
               >
                 <option value="">Select category</option>
@@ -120,7 +122,7 @@ const SupplierDashboard = () => {
                 name="price"
                 value={form.price}
                 onChange={handleChange}
-                className="w-full mt-1 p-2 border rounded"
+                className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-green-600"
                 placeholder="0.00"
                 required
               />
@@ -134,21 +136,20 @@ const SupplierDashboard = () => {
                 name="quantity"
                 value={form.quantity}
                 onChange={handleChange}
-                className="w-full mt-1 p-2 border rounded"
+                className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-green-600"
                 placeholder="Enter quantity"
                 required
               />
             </div>
             <button
               type="submit"
-              className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+              className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition-all duration-300 cursor-pointer"
             >
               Add Product
             </button>
           </form>
         </div>
 
-        {/* Product Inventory */}
         {/* Product Inventory */}
         <div className="bg-white p-6 rounded shadow">
           <h2 className="text-lg font-semibold mb-4">Product Inventory</h2>
@@ -162,7 +163,7 @@ const SupplierDashboard = () => {
                 .map((product, index) => (
                   <div
                     key={index}
-                    className="border rounded px-4 py-3 flex justify-between items-center"
+                    className="border border-gray-300 rounded px-4 py-3 flex justify-between items-center"
                   >
                     <div>
                       <p className="font-semibold">{product.name}</p>
@@ -171,16 +172,19 @@ const SupplierDashboard = () => {
                         {product.quantity} available
                       </p>
                     </div>
-                    <div className="flex gap-4 text-sm">
+                    {/* <div className="flex gap-4 text-sm">
                       <button className="text-blue-600 hover:underline">
                         <MdEdit size={18} />
                       </button>
                       <button className="text-red-600 hover:underline">
                         <IoTrash size={18} />
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 ))}
+              <button className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition-all duration-300 cursor-pointer"
+              onClick={() => navigate("/supplier/products")}
+              >See more</button>
             </div>
           )}
         </div>

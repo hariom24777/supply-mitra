@@ -29,12 +29,6 @@ const VendorLogin = () => {
         return;
       }
 
-      // const userData = docSnap.data();
-      // if (userData.role !== "vendor") {
-      //   alert("Access denied: Not a vendor.");
-      //   return;
-      // }
-      
       // Login success – go to vendor dashboard
       navigate("/vendor/dashboard");
     } catch (err) {

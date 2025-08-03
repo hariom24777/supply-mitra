@@ -59,7 +59,6 @@ const Products = () => {
 
     if (user) {
       const docRef = doc(db, "suppliers", user.uid);
-      // Remove old and add new product
       await updateDoc(docRef, {
         products: arrayRemove(oldProduct),
       });
@@ -80,20 +79,20 @@ const Products = () => {
       {products.length === 0 ? (
         <p>No products added yet.</p>
       ) : (
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {products.map((product, index) => (
             <div
               key={index}
-              className="border rounded px-4 py-3 flex justify-between items-center"
+              className="rounded px-4 py-3 shadow bg-white flex flex-col justify-between"
             >
               {editingIndex === index ? (
-                <div className="w-full space-y-2">
+                <div className="space-y-2">
                   <input
                     type="text"
                     name="name"
                     value={editedProduct.name}
                     onChange={handleEditChange}
-                    className="w-full border p-2 rounded"
+                    className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-1 focus:ring-green-600"
                     placeholder="Product Name"
                   />
                   <input
@@ -101,7 +100,7 @@ const Products = () => {
                     name="category"
                     value={editedProduct.category}
                     onChange={handleEditChange}
-                    className="w-full border p-2 rounded"
+                    className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-1 focus:ring-green-600"
                     placeholder="Category"
                   />
                   <input
@@ -109,7 +108,7 @@ const Products = () => {
                     name="price"
                     value={editedProduct.price}
                     onChange={handleEditChange}
-                    className="w-full border p-2 rounded"
+                    className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-1 focus:ring-green-600"
                     placeholder="Price"
                   />
                   <input
@@ -117,42 +116,40 @@ const Products = () => {
                     name="quantity"
                     value={editedProduct.quantity}
                     onChange={handleEditChange}
-                    className="w-full border p-2 rounded"
+                    className="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-1 focus:ring-green-600"
                     placeholder="Quantity"
                   />
                   <button
                     onClick={() => handleEditSubmit(index)}
-                    className="bg-green-600 text-white px-4 py-2 rounded mt-2"
+                    className="bg-green-600 text-white px-4 py-2 rounded w-full"
                   >
                     Save
                   </button>
                 </div>
               ) : (
                 <>
-                  <div>
-                    <p className="font-semibold">{product.name}</p>
+                  <div className="mb-2">
+                    <p className="font-semibold text-lg">{product.name}</p>
                     <p className="text-sm text-gray-500">
                       {product.category} • ₹{product.price} • {product.quantity}{" "}
                       units
                     </p>
                   </div>
-                  <div className="flex gap-4 text-sm">
+                  <div className="flex justify-between items-center text-sm">
                     <button
                       onClick={() => {
                         setEditingIndex(index);
                         setEditedProduct(product);
                       }}
-                      className="text-blue-600 hover:underline"
+                      className="text-blue-600 hover:underline flex items-center gap-1 cursor-pointer"
                     >
-                      <span className="hidden sm:inline">Edit</span>
-                      <MdEdit className="inline sm:hidden" size={18} />
+                      <MdEdit /> Edit
                     </button>
                     <button
                       onClick={() => handleDelete(product)}
-                      className="text-red-600 hover:underline"
+                      className="text-red-600 hover:underline flex items-center gap-1 cursor-pointer"
                     >
-                      <span className="hidden sm:inline">Delete</span>
-                      <IoTrash className="inline sm:hidden" size={18} />
+                      <IoTrash /> Delete
                     </button>
                   </div>
                 </>
