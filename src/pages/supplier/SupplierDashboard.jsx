@@ -108,9 +108,12 @@ const SupplierDashboard = () => {
                 required
               >
                 <option value="">Select category</option>
-                <option>Vegetables</option>
-                <option>Oil</option>
-                <option>Spices</option>
+                <option>Fresh Produce</option>
+                <option>Grains & Pulses</option>
+                <option>Spices and Seasonings</option>
+                <option>Cooking Oil & Fats</option>
+                <option>Beverages</option>
+                <option>Packaging Materials</option>
               </select>
             </div>
             <div>
@@ -182,9 +185,12 @@ const SupplierDashboard = () => {
                     </div> */}
                   </div>
                 ))}
-              <button className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition-all duration-300 cursor-pointer"
-              onClick={() => navigate("/supplier/products")}
-              >See more</button>
+              <button
+                className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition-all duration-300 cursor-pointer"
+                onClick={() => navigate("/supplier/products")}
+              >
+                See more
+              </button>
             </div>
           )}
         </div>

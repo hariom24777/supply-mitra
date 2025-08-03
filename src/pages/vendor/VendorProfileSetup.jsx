@@ -76,7 +76,7 @@ const VendorProfileSetup = () => {
         <input
           type="text"
           placeholder="Full Name"
-          className="w-full p-3 border border-gray-300 rounded-md"
+          className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
           required
           onChange={(e) => setName(e.target.value)}
         />
@@ -84,7 +84,7 @@ const VendorProfileSetup = () => {
         <input
           type="text"
           placeholder="City"
-          className="w-full p-3 border border-gray-300 rounded-md"
+          className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
           required
           onChange={(e) => setCity(e.target.value)}
         />
@@ -92,7 +92,7 @@ const VendorProfileSetup = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition"
+          className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 cursor-pointer"
         >
           {loading ? "Saving..." : "Save Profile"}
         </button>
