@@ -121,7 +121,7 @@ const VendorDashboard = () => {
             </p>
 
             <div className="text-green-600 font-semibold mb-3">
-              ₹{product.price}
+              ₹{product.price} / {product.unit || customUnit}
             </div>
 
             <div className="flex items-center justify-between">

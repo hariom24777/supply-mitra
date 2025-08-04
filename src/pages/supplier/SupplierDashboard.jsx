@@ -214,7 +214,7 @@ const SupplierDashboard = () => {
                     <div>
                       <p className="font-semibold">{product.name}</p>
                       <p className="text-sm text-gray-500">
-                        {product.category} | ₹{product.price} / {product.unit} |{" "}
+                        {product.category} | ₹{product.price} / {product.unit || customUnit} |{" "}
                         {product.quantity} {product.unit || product.customUnit}s available
                       </p>
                     </div>
