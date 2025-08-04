@@ -131,8 +131,8 @@ const Products = () => {
                   <div className="mb-2">
                     <p className="font-semibold text-lg">{product.name}</p>
                     <p className="text-sm text-gray-500">
-                      {product.category} • ₹{product.price} • {product.quantity}{" "}
-                      units
+                      {product.category} | ₹{product.price} / {product.unit} |{" "}
+                        {product.quantity} {product.unit || product.customUnit}s available
                     </p>
                   </div>
                   <div className="flex justify-between items-center text-sm">

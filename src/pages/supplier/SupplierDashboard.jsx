@@ -2,14 +2,11 @@ import { useState, useEffect } from "react";
 import { getAuth } from "firebase/auth";
 import {
   doc,
-  getDoc,
   updateDoc,
   arrayUnion,
   onSnapshot,
 } from "firebase/firestore";
 import { db } from "../../firebase/config";
-import { IoTrash } from "react-icons/io5";
-import { MdEdit } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 const SupplierDashboard = () => {
@@ -21,6 +18,8 @@ const SupplierDashboard = () => {
     category: "",
     price: "",
     quantity: "",
+    unit: "",
+    customUnit: "",
   });
 
   const auth = getAuth();
@@ -55,11 +54,14 @@ const SupplierDashboard = () => {
     if (!user) return alert("Login required");
 
     const supplierRef = doc(db, "suppliers", user.uid);
+    const unitToUse = form.unit === "other" ? form.customUnit : form.unit;
+
     const newProduct = {
       name: form.name,
       category: form.category,
       price: parseFloat(form.price),
       quantity: parseInt(form.quantity),
+      unit: unitToUse,
     };
 
     try {
@@ -67,7 +69,14 @@ const SupplierDashboard = () => {
         products: arrayUnion(newProduct),
       });
 
-      setForm({ name: "", category: "", price: "", quantity: "" });
+      setForm({
+        name: "",
+        category: "",
+        price: "",
+        quantity: "",
+        unit: "",
+        customUnit: "",
+      });
     } catch (error) {
       console.error("Error adding product:", error);
       alert("Failed to add product.");
@@ -131,6 +140,40 @@ const SupplierDashboard = () => {
               />
             </div>
             <div>
+              <label className="block text-sm font-medium">Unit</label>
+              <select
+                name="unit"
+                value={form.unit}
+                onChange={handleChange}
+                className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-green-600"
+                required
+              >
+                <option value="">Select unit</option>
+                <option value="kg">per kg</option>
+                <option value="litre">per litre</option>
+                <option value="dozen">per dozen</option>
+                <option value="piece">per piece</option>
+                <option value="pack">per pack</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            {form.unit === "other" && (
+              <div>
+                <label className="block text-sm font-medium">Custom Unit</label>
+                <input
+                  type="text"
+                  name="customUnit"
+                  value={form.customUnit}
+                  onChange={handleChange}
+                  className="w-full mt-1 p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-green-600"
+                  placeholder="e.g., per tray, per sack"
+                  required
+                />
+              </div>
+            )}
+
+            <div>
               <label className="block text-sm font-medium">
                 Available Quantity
               </label>
@@ -162,7 +205,7 @@ const SupplierDashboard = () => {
             <div className="space-y-4">
               {[...products]
                 .slice(-4)
-                .reverse() // Optional: newest on top
+                .reverse()
                 .map((product, index) => (
                   <div
                     key={index}
@@ -171,18 +214,10 @@ const SupplierDashboard = () => {
                     <div>
                       <p className="font-semibold">{product.name}</p>
                       <p className="text-sm text-gray-500">
-                        {product.category} • ₹{product.price} •{" "}
-                        {product.quantity} available
+                        {product.category} | ₹{product.price} / {product.unit} |{" "}
+                        {product.quantity} {product.unit || product.customUnit}s available
                       </p>
                     </div>
-                    {/* <div className="flex gap-4 text-sm">
-                      <button className="text-blue-600 hover:underline">
-                        <MdEdit size={18} />
-                      </button>
-                      <button className="text-red-600 hover:underline">
-                        <IoTrash size={18} />
-                      </button>
-                    </div> */}
                   </div>
                 ))}
               <button
